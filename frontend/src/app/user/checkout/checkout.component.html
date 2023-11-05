@@ -1,0 +1,272 @@
+<!-- component -->
+
+
+<div class="min-w-screen min-h-screen bg-gray-50 py-5">
+  <div class="px-5">
+    <div class="mb-2">
+      <h1 class="text-3xl md:text-5xl font-bold text-gray-600">Caisse.</h1>
+    </div>
+    <!-- <div class="mb-5 text-gray-400">
+      <a href="#" class="focus:outline-none hover:underline text-gray-500">Home</a> / <a href="#"
+        class="focus:outline-none hover:underline text-gray-500">Cart</a> / <span class="text-gray-600">Checkout</span>
+    </div> -->
+  </div>
+
+  <form action="" [formGroup]="checkoutForm">
+    <div class="w-full bg-white border-t border-b border-gray-200 px-5 py-10 text-gray-800">
+      <div class="w-full">
+        <div class="-mx-3 md:flex items-start ">
+
+          <div *ngFor="let cartitem of cart" class="px-3 md:w-5/12 lg:pr-10">
+            <div class="w-full mx-auto text-gray-800 font-light mb-6 border-b border-gray-200 pb-6">
+              <div *ngFor="let item of cartitem.items " class="w-full flex items-center">
+                <div class="overflow-hidden rounded-lg w-16 h-16 bg-gray-50 border border-gray-200">
+                  <img [src]="'http://localhost:4000/getimage/'+item.image" alt="">
+                </div>
+                <div class="flex-grow pl-3 mt-2">
+                  <h3 class="font-semibold uppercase text-2xl text-gray-600">{{item.name}}</h3>
+                  <p class="text-gray-400">x {{item.quantity}}</p>
+                </div>
+                <div>
+                  <span class="font-semibold text-gray-600 text-xl">{{item.price}} DT</span><span
+                    class="font-semibold text-gray-600 text-sm"></span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="mb-6 mt-3 pb-6 border-b border-gray-200 text-gray-800">
+              <div class="w-full flex mb-3 items-center">
+                <div class="flex-grow">
+                  <span class="text-gray-600">Subtotal</span>
+                </div>
+                <div class="pl-3">
+                  <span class="font-semibold"> {{cartitem.total}} DT</span>
+                </div>
+              </div>
+              <div class="w-full flex items-center">
+                <div class="flex-grow">
+                  <span class="text-gray-600">Taxes (GST)</span>
+                </div>
+                <div class="pl-3">
+                  <span class="font-semibold"> 7 DT</span>
+                </div>
+              </div>
+            </div>
+            <div class="mb-6 pb-6 border-b border-gray-200 md:border-none text-gray-800 text-xl">
+              <div class="w-full flex items-center">
+                <div class="flex-grow">
+                  <span class="text-gray-600">Total</span>
+                </div>
+                <div class="pl-3">
+                  <span class="font-semibold text-gray-400 text-sm"></span> <span class="font-semibold">
+                    {{cartitem.total+7}} DT</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="px-3 md:w-7/12">
+
+            <div class="overflow-hidden shadow sm:rounded-md">
+              <form action="" [formGroup]="checkoutForm" (ngSubmit)="passeCommande()">
+                <div class="bg-white px-4 py-5 sm:p-6">
+                  <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-6 sm:col-span-3">
+                      <label for="first-name" class="block text-sm font-medium text-gray-700">Nom</label>
+                      <input type="text" name="first-name" id="first-name" formControlName="firstname"
+                        autocomplete="given-name" [(ngModel)]="order!.nom"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                      <div *ngIf="checkoutForm.get('firstname')?.touched && checkoutForm.get('firstname')?.invalid"
+                        class="text-primary-700 text-md"> Nom est obligatoire</div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                      <label for="last-name" class="block text-sm font-medium text-gray-700">Prenom</label>
+                      <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                        formControlName="lastname" [(ngModel)]="order!.prenom"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                      <div *ngIf="checkoutForm.get('lastname')?.touched && checkoutForm.get('lastname')?.invalid"
+                        class="text-primary-700 text-md"> Prenom est obligatoire</div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-4">
+                      <label for="email-address" class="block text-sm font-medium text-gray-700">Numéro de
+                        téléphone</label>
+                      <input type="number" name="email-address" id="email-address" autocomplete="email"
+                        formControlName="ntlf" required [(ngModel)]="order!.ntlf" min="0"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                      <div *ngIf="checkoutForm.get('ntlf')?.touched && checkoutForm.get('ntlf')?.invalid"
+                        class="text-primary-700 text-md">Numéro de téléphone est obligatoire</div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                      <label for="country" class="block text-sm font-medium text-gray-700">Pays</label>
+                      <select id="country" name="country" autocomplete="country-name" formControlName="pays"
+                        [(ngModel)]="order!.pays"
+                        class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                        <option value="tunise">Tunisie</option>
+                      </select>
+                      <div *ngIf="checkoutForm.get('pays')?.touched && checkoutForm.get('pays')?.invalid"
+                        class="text-primary-700 text-md">Pays est obligatoire</div>
+                    </div>
+
+                    <div class="col-span-6">
+                      <label for="street-address" class="block text-sm font-medium text-gray-700">Adresse de rue</label>
+                      <input type="text" name="street-address" id="street-address" autocomplete="street-address"
+                        [(ngModel)]="order!.adresse" formControlName="adresserue"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                      <div *ngIf="checkoutForm.get('adresserue')?.touched && checkoutForm.get('adresserue')?.invalid"
+                        class="text-primary-700 text-md"> Adresse de rue est obligatoire</div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                      <label for="city" class="block text-sm font-medium text-gray-700">Ville</label>
+                      <input type="text" name="city" id="city" autocomplete="address-level2" formControlName="ville"
+                        [(ngModel)]="order!.ville"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                      <div *ngIf="checkoutForm.get('ville')?.touched && checkoutForm.get('ville')?.invalid"
+                        class="text-primary-700 text-md"> Ville est obligatoire</div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                      <label for="region" class="block text-sm font-medium text-gray-700">État/Région</label>
+                      <input type="text" name="region" id="region" autocomplete="address-level1" formControlName="etat"
+                        [(ngModel)]="order!.etat"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                      <div *ngIf="checkoutForm.get('etat')?.touched && checkoutForm.get('etat')?.invalid"
+                        class="text-primary-700 text-md"> Etat/Region est obligatoire</div>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                      <label for="postal-code" class="block text-sm font-medium text-gray-700">ZIP / Postal code</label>
+                      <input type="number" name="postal-code" id="postal-code" autocomplete="postal-code"
+                        [(ngModel)]="order!.code" formControlName="codepostal" min="0"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                      <div *ngIf="checkoutForm.get('codepostal')?.touched && checkoutForm.get('codepostal')?.invalid"
+                        class="text-primary-700 text-md"> Code postal est obligatoire</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                <button type="submit"
+                  class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
+              </div> -->
+              </form>
+            </div>
+
+
+            <!-- <div class="w-full mx-auto rounded-lg bg-white border border-gray-200 p-3 text-gray-800 font-light mb-6">
+            <div class="w-full flex mb-3 items-center">
+              <div class="w-32">
+                <span class="text-gray-600 font-semibold">Contact</span>
+              </div>
+              <div class="flex-grow pl-3">
+                <span>Scott Windon</span>
+              </div>
+            </div>
+            <div class="w-full flex items-center">
+              <div class="w-32">
+                <span class="text-gray-600 font-semibold">Billing Address</span>
+              </div>
+              <div class="flex-grow pl-3">
+                <span>123 George Street, Sydney, NSW 2000 Australia</span>
+              </div>
+            </div>
+          </div> -->
+
+
+            <!--
+            <div class="w-full mx-auto rounded-lg mt-2 bg-white border border-gray-200 text-gray-800 font-light mb-6">
+              <div class="w-full p-3 border-b border-gray-200">
+                <div class="mb-5">
+                  <label for="type1" class="flex items-center cursor-pointer">
+                    <!-- <input type="radio" class="form-radio h-5 w-5 text-indigo-500" name="type" id="type1" checked>
+                    <img src="https://leadershipmemphis.org/wp-content/uploads/2020/08/780370.png" class="h-6 ml-3">
+                  </label>
+                </div>
+                <div>
+                  <div class="mb-3">
+                    <label class="text-gray-600 font-semibold text-sm mb-2 ml-1">Name on card</label>
+                    <div>
+                      <input
+                        class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder="John Smith" type="text" />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="text-gray-600 font-semibold text-sm mb-2 ml-1">Card number</label>
+                    <div>
+                      <input
+                        class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder="0000 0000 0000 0000" type="text" />
+                    </div>
+                  </div>
+                  <div class="mb-3 -mx-2 flex items-end">
+                    <div class="px-2 w-1/4">
+                      <label class="text-gray-600 font-semibold text-sm mb-2 ml-1">Expiration date</label>
+                      <div>
+                        <select
+                          class="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                          <option value="01">01 - January</option>
+                          <option value="02">02 - February</option>
+                          <option value="03">03 - March</option>
+                          <option value="04">04 - April</option>
+                          <option value="05">05 - May</option>
+                          <option value="06">06 - June</option>
+                          <option value="07">07 - July</option>
+                          <option value="08">08 - August</option>
+                          <option value="09">09 - September</option>
+                          <option value="10">10 - October</option>
+                          <option value="11">11 - November</option>
+                          <option value="12">12 - December</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="px-2 w-1/4">
+                      <select
+                        class="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                      </select>
+                    </div>
+                    <div class="px-2 w-1/4">
+                      <label class="text-gray-600 font-semibold text-sm mb-2 ml-1">Security code</label>
+                      <div>
+                        <input
+                          class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                          placeholder="000" type="text" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="w-full p-3">
+              <label for="type2" class="flex items-center cursor-pointer">
+                <input type="radio" class="form-radio h-5 w-5 text-indigo-500" name="type" id="type2">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" width="80" class="ml-3" />
+              </label>
+            </div>
+            </div>
+            <div> -->
+            <button type="button" [disabled]="checkoutForm.invalid" (click)="passeCommande()"
+              class="mt-3 block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-2 font-semibold">
+              <!-- <i
+                class="mdi mdi-lock-outline mr-1"></i>--> Passez la commande</button>
+
+            <!-- </div> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,9 @@
+.mat-dialog-container {
+  padding: 0px !important;
+}
+
+::ng-deep mat-dialog-content {
+  max-height: 80vh;
+  width: 80wh;
+  overflow-y: auto;
+}

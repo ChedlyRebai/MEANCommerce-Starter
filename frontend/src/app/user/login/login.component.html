@@ -1,0 +1,70 @@
+<!-- component -->
+<!-- Container -->
+<div class="flex flex-wrap min-h-screen w-full content-center justify-center bg-gray-200 py-10">
+
+  <!-- Login component -->
+  <div class="flex shadow-md">
+    <!-- Login form -->
+    <div class="flex flex-wrap content-center justify-center rounded-l-md bg-white"
+      style="width: 24rem; height: 32rem;">
+      <div class="w-72">
+        <!-- Heading -->
+        <h1 class="text-xl font-semibold">Bienvenu</h1>
+        <small class="text-gray-400">Content de te revoir! Veuillez saisir vos coordonnées</small>
+
+        <!-- Form -->
+        <form class="mt-4" [formGroup]="loginform" (ngSubmit)="login()">
+          <div class="mb-3">
+            <label class="mb-2 block text-xs font-semibold">Email</label>
+            <input type="email" placeholder="Enter your email" formControlName="email"
+              class="block w-full rounded-md border border-gray-300 focus:border-primary-700 focus:outline-none focus:ring-1 focus:ring-primary-700 py-1 px-1.5 text-gray-500" />
+            <div *ngIf="loginform.get('email')?.touched && loginform.get('email')?.invalid"
+              class="text-primary-700 text-md"> Email est obligatoire</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="mb-2 block text-xs font-semibold">Mot de passe</label>
+            <input type="password" placeholder="*****" formControlName="password"
+              class="block w-full rounded-md border border-gray-300 focus:border-primary-700 focus:outline-none focus:ring-1 focus:ring-primary-700 py-1 px-1.5 text-gray-500" />
+            <div *ngIf="loginform.get('password')?.touched && loginform.get('password')?.invalid"
+              class="text-primary-700 text-md"> Mot de passe</div>
+            <div *ngIf="errorMessage" class="text-primary-700 text-md">{{errorMessage}}</div>
+          </div>
+
+          <div class="mb-3 flex flex-wrap content-center">
+
+            <!-- <a href="#" class="text-xs font-semibold text-purple-700">Forgot password?</a> -->
+          </div>
+
+          <div class="mb-3">
+            <button [disabled]="loginform.invalid"
+              class="mb-1.5 block w-full text-center text-white bg-primary-600 hover:bg-primary-700 px-2 py-1.5 rounded-md">Sign
+              in</button>
+            <!-- <button
+              class="flex flex-wrap justify-center w-full border border-gray-300 hover:border-gray-500 px-2 py-1.5 rounded-md">
+              <img alt="" class="w-5 mr-2"
+                src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA">
+              Connectez-vous avec Google
+            </button> -->
+          </div>
+        </form>
+
+        <!-- Footer -->
+        <div class="text-center">
+          <span class="text-xs text-gray-400 font-semibold">Vous n'avez pas de compte ?</span>
+          <a routerLink="/register" class="text-xs font-semibold text-primary-700">S'inscrire</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login banner -->
+    <div class=" hidden md:flex flex-wrap content-center justify-center rounded-r-md"
+      style="width: 24rem; height: 32rem;">
+      <img alt="" class="w-full h-full bg-center bg-no-repeat bg-slate-100 bg-cover rounded-r-md"
+        src="https://www.sna.com.tn/wp-content/uploads/2021/02/SNA_logo.svg">
+    </div>
+    <!-- https://i.imgur.com/9l1A4OS.jpeg -->
+  </div>
+
+
+</div>

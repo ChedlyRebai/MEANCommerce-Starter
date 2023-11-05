@@ -1,0 +1,10 @@
+app-commission-me-dialog {
+  margin: 0px;
+  padding: 0px;
+}
+
+mat-dialog-container {
+  margin: 0px;
+  padding: 0px;
+  display: none;
+}

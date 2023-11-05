@@ -1,0 +1,130 @@
+<nav class="bg-white z-40 sticky top-0 w-full border-gray-200 px-2 sm:px-4 py-2.5  dark:bg-gray-900">
+  <div class="container flex flex-wrap items-center justify-between mx-auto">
+
+    <a href="" class="flex items-center">
+      <img src="https://www.sna.com.tn/wp-content/uploads/2021/02/SNA_logo.svg" class="h-6 mr-3 sm:h-9"
+        alt="Flowbite Logo" />
+    </a>
+
+    <div class="flex md:order-2">
+      <!-- if isLogged -->
+      <button type="button" *ngIf="!auth.islogged()" routerLink="login"
+        class="relative inline-flex items-center p-3 text-sm font-medium text-center text-gray-700 mr-4 rounded-lg hover:text-primary-600  ">
+
+        <svg fill="none" class="w-6 h-6" stroke="currentColor" stroke-width="1.5" viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z">
+          </path>
+        </svg>
+        <span class="sr-only">Notifications</span>
+        <!-- <div
+          class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -right-1 dark:border-gray-900">
+          {{itemsNum}}</div> -->
+      </button>
+
+      <!-- if !isLogged -->
+      <button type="button" *ngIf="auth.islogged()" (click)="openDialog()"
+        class="relative inline-flex items-center p-3  text-sm font-medium text-center text-gray-700 mr-6 rounded-lg hover:text-primary-600">
+        <svg fill="none" class="w-6 h-6" stroke="currentColor" stroke-width="1.5" viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z">
+          </path>
+        </svg>
+        <span class="sr-only">Notifications</span>
+        <div
+          class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-0 -right-1 dark:border-gray-900">
+          {{itemsNum}}</div>
+      </button>
+      <button type="button" routerLink="login" *ngIf="!auth.islogged()"
+        class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-primary-600 dark:hover:text-primary-600 dark:focus:ring-primary-700">Login</button>
+      <button *ngIf="auth.islogged()" (click)="auth.logout()" type="button"
+        class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-primary-600 dark:hover:text-primary-600 dark:focus:ring-primary-700">Logout</button>
+      <button data-collapse-toggle="navbar-cta" type="button"
+        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        aria-controls="navbar-cta" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+      <ul
+        class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <!-- <li>
+          <a routerLink="accueil" routerLinkActive="active"
+            class="block py-2 pl-3 pr-4 text-gray-600  rounded md:bg-transparent md:text-primary-600 md:p-0 dark:text-white"
+            aria-current="page">A Propos De Sna</a>
+        </li>
+        <li>
+          <a href="#"
+            class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary-600 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+        </li> -->
+        <!-- <li>
+          <button (click)="openDialog()" routerLink="contact" routerLinkActive="active"
+            class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary-600 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</button>
+        </li> -->
+        <li>
+          <a href="#" routerLinkActive="active" routerLink="productlist" [routerLinkActiveOptions]="{exact: true}"
+            class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary-600 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+            Nos Produit</a>
+        </li>
+
+
+
+        <!-- <li *ngIf="auth.isAdmin()"> -->
+        <li>
+          <a routerLinkActive="active" routerLink="admin"
+            class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary-600 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+            Dashboard </a>
+        </li>
+
+        <!-- <li *ngIf="auth.isAdmin()"> -->
+        <li>
+          <a routerLinkActive="active" routerLink="admin/dashboard" [routerLinkActiveOptions]="{exact: true}"
+            class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary-600 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+            Statistique</a>
+        </li>
+
+        <!-- <li *ngIf="!auth.islogged()">
+          <a href="#" routerLinkActive="active" routerLink="login"
+            class=" py-2 pl-3 pr-4 flex text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary-600 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+
+            <svg aria-hidden="true" class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
+              </path>
+            </svg>
+            Panier
+          </a>
+        </li>
+        <li>
+          <button *ngIf="auth.islogged()" (click)="openDialog()"
+            class=" py-2  pr-4 flex text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary-600 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+
+            <svg aria-hidden="true" class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
+              </path>
+            </svg>
+            Panier
+
+          </button>
+        </li> -->
+      </ul>
+      <hr class="">
+      <div class="hidden sm:block" aria-hidden="true">
+        <div class="py-5">
+          <div class="border-t border-gray-200"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

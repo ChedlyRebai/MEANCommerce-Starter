@@ -1,0 +1,242 @@
+<div class="hidden sm:block" aria-hidden="true">
+  <div class="">
+    <div class="border-t border-gray-200 mb-6"></div>
+  </div>
+</div>
+
+<div class=" container mx-auto mt-10 sm:mt-0">
+  <div class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="md:col-span-1">
+      <div class="px-4 sm:px-0">
+        <p class="text-2xl font-medium leading-6 text-gray-900">Ajouter un produit</p>
+        <!-- <p class="mt-1 text-sm text-gray-600">Use a permanent address where you can receive mail.</p> -->
+      </div>
+      <!-- <div class="px-4 mt-11 sm:px-0">
+        <p class="text-4xl font-medium leading-6 text-gray-900">Créer un produit</p>
+        <p class="mt-1 text-sm text-gray-600"></p>
+      </div> -->
+    </div>
+    <div class="mt-5 md:col-span-2 md:mt-0">
+      <form action="#" [formGroup]="addForm">
+        <div class="overflow-hidden  shadow sm:rounded-md">
+          <div class="bg-white rounded-md shadow-md px-4 py-5 sm:p-6">
+            <!-- <div class="flex flex-col  gap-6">
+              <div class="col-span-12 sm:col-span-3"> -->
+            <div class="grid grid-cols-6 gap-6">
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="block text-sm font-medium text-gray-700">Nom</label>
+                <input formControlName="name" [(ngModel)]="product.name" type="text" name="first-name" id="first-name"
+                  autocomplete="given-name"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+
+
+                <div *ngIf="addForm.get('name')?.touched && addForm.get('name')?.invalid"
+                  class="text-primary-700 text-md"> Nom est obligatoire </div>
+              </div>
+
+              <!-- autocomplete="email" -->
+              <div class="col-span-6 sm:col-span-3">
+                <label for="prix" class="block text-sm font-medium text-gray-700">Prix</label>
+                <input formControlName="price" [(ngModel)]="product.price" type="number" name="prix" id="prix"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+
+                <div *ngIf="addForm.get('price')?.touched && addForm.get('price')?.invalid"
+                  class="text-primary-700 text-md"> prix est obligatoire</div>
+              </div>
+
+
+              <!-- <div class="flex justify-between"> -->
+              <div class="col-span-6 sm:col-span-4">
+
+
+                <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                <select id="category" formControlName="category" [(ngModel)]="product.category" name="category"
+                  autocomplete="country-name"
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2.5 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm">
+                  <option value="" selected>Choisir un Category</option>
+                  <option *ngFor="let category of categorys" [value]="category.name">
+                    {{category.name}}</option>
+                </select>
+                <div *ngIf="addForm.get('category')?.touched && addForm.get('category')?.invalid"
+                  class="text-primary-700 text-md"> Categorie est obligatoire</div>
+              </div>
+              
+              <div class="col-span-6">
+                <label for="street-address" class="block text-sm font-medium text-gray-700">Description</label>
+                <angular-editor formControlName="description" rows="3" [(ngModel)]="product!.description"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></angular-editor>
+                <div *ngIf="addForm.get('description')?.touched && addForm.get('description')?.invalid"
+                  class="text-primary-700 text-md mb-2"> Description est obligatoire</div>
+              </div>
+            </div>
+
+            <!-- image
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Image</label>
+              <div class="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+                <div class="space-y-1 text-center">
+                  <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48"
+                    aria-hidden="true">
+                    <path
+                      d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <div class="flex text-sm text-gray-600">
+                    <label for="file-upload"
+                      class="relative cursor-pointer rounded-md bg-white font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500">
+                      <span>Télécharger une image</span>
+                      <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                    </label>
+                    <p class="pl-1">or drag and drop</p>
+                  </div>
+                  <p class="text-xs text-gray-500">PNG, JPG, GIF</p>
+                </div>
+              </div>
+            </div>-->
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Image</label>
+            <input (change)="select($event)"
+              class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+              id="file_input" type="file" formControlName="image" required>
+            <div *ngIf="addForm.get('image')?.touched && addForm.get('image')?.invalid"
+              class="text-primary-700 text-md mb-2"> Image est obligatoire</div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+            <button type="submit" [disabled]="addForm.invalid" (click)="save()"
+              class="inline-flex justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">Enregistrer</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="hidden sm:block" aria-hidden="true">
+  <div class="py-5">
+    <div class="border-t border-gray-200"></div>
+  </div>
+</div>
+
+
+
+<!-- drawer component
+<div id="drawer-contact"
+  class="fixed z-40 h-screen p-4 overflow-y-auto bg-white w-80 dark:bg-gray-800 transition-transform left-0 top-0 -translate-x-full"
+  tabindex="-1" aria-labelledby="drawer-contact-label">
+  <h5 id="drawer-label"
+    class="inline-flex items-center mb-6 text-base font-semibold text-gray-500 uppercase dark:text-gray-400"><svg
+      class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd"
+        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+        clip-rule="evenodd"></path>
+    </svg>Ajouter une catégorie</h5>
+  <button type="button" data-drawer-hide="drawer-contact" aria-controls="drawer-contact"
+    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd"
+        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+        clip-rule="evenodd"></path>
+    </svg>
+    <span class="sr-only">Close menu</span>
+  </button>
+  <form action="#" class="mb-6" [formGroup]="addCategoryForm">
+    <div class="mb-6">
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom de categorie</label>
+      <input type="text" id="email" formControlName="name"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="" required>
+      <div *ngIf="addCategoryForm.get('name')?.touched && addCategoryForm.get('name')?.invalid"
+        class="text-primary-700 text-md mb-2"> Nom de categorie is required</div>
+    </div>
+
+    <div class="mb-6">
+      <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sous titre</label>
+      <input type="text" id="subject"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="" formControlName="description" required>
+      <div *ngIf="addCategoryForm.get('description')?.touched && addCategoryForm.get('description')?.invalid"
+        class="text-primary-700 text-md mb-2"> Description is required</div>
+
+    </div>
+
+    <div class="mb-6">
+      <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Liste des
+        catégories</label>
+
+      <div class="relative overflow-x-auto ">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <!-- <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-6 py-3 rounded-l-lg">
+                Product name
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Qty
+              </th>
+
+            </tr>
+          -->
+
+
+<!--
+<div class="mx-auto container mt-10 sm:mt-0">
+  <div class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="md:col-span-1">
+      <div class="px-4 sm:px-0">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Personal Information</h3>
+        <p class="mt-1 text-sm text-gray-600">Use a permanent address where you can receive mail.</p>
+      </div>
+    </div>
+    <div class="mt-5 md:col-span-2 md:mt-0">
+      <form action="#" method="POST">
+        <div class="overflow-hidden shadow sm:rounded-md">
+          <div class="bg-white px-4 py-5 sm:p-6">
+            <div class="grid grid-cols-6 gap-6">
+              <div class="col-span-6 sm:col-span-3">
+                <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
+                <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
+                <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+              </div>
+
+              <div class="col-span-6 sm:col-span-4">
+                <label for="email-address" class="block text-sm font-medium text-gray-700">Email address</label>
+                <input type="number" min="0" name="email-address" id="email-address" autocomplete="email"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                <select id="country" name="country" autocomplete="country-name"
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                  <option>United States</option>
+                  <option>Canada</option>
+                  <option>Mexico</option>
+                </select>
+              </div>
+
+              <div class="col-span-6">
+                <label for="street-address" class="block text-sm font-medium text-gray-700">Street address</label>
+                <input type="text" name="street-address" id="street-address" autocomplete="street-address"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+              </div>
+
+
+
+
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+            <button type="submit"
+              class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->
